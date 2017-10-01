@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+
 require ::File.expand_path('../../config/environment', __FILE__)
 require "anycable-rails"
 
@@ -8,5 +9,12 @@ Anycable.configure do |config|
 end
 
 Rails.application.eager_load!
+
+go_thread = Thread.new do
+  Process.wait Process.spawn("anycable-go -addr=0.0.0.0:3334")
+  raise "Anycable-Go failed!"
+end
+
+go_thread.abort_on_exception = true
 
 Anycable::Server.start
