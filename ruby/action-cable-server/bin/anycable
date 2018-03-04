@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+ENV['RAILS_ENV'] ||= 'production'
 ENV['USE_ANYCABLE'] ||= '1'
 
 require ::File.expand_path('../../config/environment', __FILE__)
