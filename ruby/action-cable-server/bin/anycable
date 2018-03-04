@@ -8,8 +8,10 @@ Anycable.connection_factory = ActionCable.server.config.connection_class.call
 
 Rails.application.eager_load!
 
+anycable_go_cmd = ENV.fetch('ANYCABLEGO', 'anycable-go -addr=0.0.0.0:3334')
+
 go_thread = Thread.new do
-  Process.wait Process.spawn("anycable-go -addr=0.0.0.0:3334")
+  Process.wait Process.spawn(anycable_go_cmd)
   raise "Anycable-Go failed!"
 end
 
