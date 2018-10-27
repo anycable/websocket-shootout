@@ -13,7 +13,7 @@ require 'plezi'
 
 class ShootoutApp
   def on_open
-    subscribe channel: "all"
+    subscribe "all"
   end
 
   # we won't be using AutoDispatch, but directly using the `on_message` callback.
@@ -22,7 +22,7 @@ class ShootoutApp
     if cmd == 'echo'
       write({type: 'echo', payload: payload}.to_json)
     else
-      publish channel: "all", message: { type: 'broadcast', payload: payload }.to_json
+      ::Iodine.publish "all", { type: 'broadcast', payload: payload }.to_json
       write({type: "broadcastResult", payload: payload}.to_json)
     end
   end
