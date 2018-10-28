@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1'
+# gem "rails", "~> 5.2"
+gem "rails", github: "boazsegev/rails" # for iodine
+gem "iodine"
+gem "falcon"
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -20,7 +24,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 3.0'
+gem 'redis', '>= 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -29,11 +33,12 @@ gem 'redis', '~> 3.0'
 
 # gem "anycable", path: "../../../anycable-dev/anycable", require: false
 # gem "anycable-rails", path: "../../../anycable-dev/anycable-rails", require: false
-gem 'anycable-rails', '~> 0.5.3', require: false
+gem 'anycable', github: "anycable/anycable"
+gem 'anycable-rails', github: "anycable/anycable-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
+  gem 'pry-byebug', platform: :mri
 end
 
 group :development do
