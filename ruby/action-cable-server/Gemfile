@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem "rails", "~> 5.2"
 gem "rails", github: "boazsegev/rails" # for iodine
-gem "iodine"
-gem "falcon"
+gem "iodine", require: false
+gem "falcon", require: false
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -33,8 +33,8 @@ gem 'redis', '>= 3.0'
 
 # gem "anycable", path: "../../../anycable-dev/anycable", require: false
 # gem "anycable-rails", path: "../../../anycable-dev/anycable-rails", require: false
-gem 'anycable', github: "anycable/anycable"
-gem 'anycable-rails', github: "anycable/anycable-rails"
+gem 'anycable', github: "anycable/anycable", require: false
+gem 'anycable-rails', github: "anycable/anycable-rails", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
