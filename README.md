@@ -27,25 +27,16 @@ The following platforms currently have servers implemented.
 * Ruby / Rails
 * Rust
 
-### Build Instructions
-
-Some dependencies are tracked via git submodules. First step is to pull them down.
-
-```
-git submodule init
-git submodule update
-```
-
-Look for a README.md in each projects directory for instructions on building and running the servers.
-
 ## Benchmark
 
 As part of this comparison a benchmark tool `websocket-bench` was built to test the performance of these websocket servers. `websocket-bench` is designed to find how many connections a server can handle while providing an acceptable level of performance. For example, given the requirement that 4 broadcast requests are served concurrently and 95% of broadcasts be completed within 500ms, how many connections can the server handle?
 
+See [websocket-bench](https://github.com/anycable/websocket-bench) repo for installation instructions.
+
 Here is an example benchmark run:
 
-```
-% % bin/websocket-bench broadcast ws://earth.local:3334/ws --concurrent 10 --sample-size 100 --step-size 1000 --limit-percentile 95 --limit-rtt 250ms
+```sh
+bin/websocket-bench broadcast ws://earth.local:3334/ws --concurrent 10 --sample-size 100 --step-size 1000 --limit-percentile 95 --limit-rtt 250ms
 clients:  1000    95per-rtt:  47ms    min-rtt:   9ms    median-rtt:  20ms    max-rtt:  66ms
 clients:  2000    95per-rtt:  87ms    min-rtt:   9ms    median-rtt:  43ms    max-rtt: 105ms
 clients:  3000    95per-rtt: 121ms    min-rtt:  21ms    median-rtt:  58ms    max-rtt: 201ms
@@ -55,8 +46,6 @@ clients:  5000    95per-rtt: 184ms    min-rtt:  37ms    median-rtt:  95ms    max
 ```
 
 The above benchmark starts by connecting 1000 websocket clients to ws://earth.local:3334/ws. Then it sends 100 broadcast requests with a concurrency of 10. It increases by 1000 clients at a time until the 95th percentile round-trip time exceeds 250ms.
-
-Run `make` to build the benchmark tool. Ensure you have previously initialized git submodules or the build will fail. The benchmark tool will be built to `bin/websocket-bench`.
 
 ## Open file limits
 
@@ -89,16 +78,16 @@ It is *highly* recommended that `websocket-bench` and the server be run on separ
 
 Run `websocket-bench` with the `--help` parameter for detailed info.
 
-```
-% bin/websocket-bench --help
+```sh
+websocket-bench --help
 ```
 
 ## Outbound connection limits
 
 A host can only establish a few ten-thousands of outbound connections before it suffer port exhaustion. To be more accurate that limit is per IP address. `websocket-bench` can use multiple IP addresses to establish more connections.
 
-```
-bin/websocket-bench broadcast ws://earth.local:3334/ws -c 4 -s 40 -l 192.168.50.5 -l 192.168.50.246 -l 192.168.50.247 --step-size 1000
+```sh
+websocket-bench broadcast ws://earth.local:3334/ws -c 4 -s 40 -l 192.168.50.5 -l 192.168.50.246 -l 192.168.50.247 --step-size 1000
 ```
 
 The above command would use addresses 192.168.50.5, 192.168.50.246, and 192.168.50.247.
@@ -107,7 +96,7 @@ Of course, this requires that the host _have_ multiple IP addresses. On Ubuntu 1
 
 Example /etc/network/interfaces snippet:
 
-```
+```txt
 ...
 up /sbin/ip addr add 192.168.50.246/24 dev eth0
 up /sbin/ip addr add 192.168.50.247/24 dev eth0
@@ -117,12 +106,10 @@ down /sbin/ip addr del 192.168.50.247/24 dev eth0
 ...
 ```
 
-## Results
-
-Results are in the results directory.
-
 ## About
 
 [![Hashrocket logo](https://hashrocket.com/hashrocket_logo.svg)](https://hashrocket.com)
 
-websocket-shootout is supported by the team at [Hashrocket, a multidisciplinary design and development consultancy](https://hashrocket.com). If you'd like to [work with us](https://hashrocket.com/contact-us/hire-us) or [join our team](https://hashrocket.com/contact-us/jobs), don't hesitate to get in touch.
+websocket-shootout was originally created by the team at [Hashrocket, a multidisciplinary design and development consultancy](https://hashrocket.com). If you'd like to [work with Hashrocket](https://hashrocket.com/contact-us/hire-us) or [join their team](https://hashrocket.com/contact-us/jobs), don't hesitate to get in touch.
+
+This fork is supported by [Evil Martians](https://evilmartians.com).
