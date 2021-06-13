@@ -1,20 +1,19 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead:
-gem "rails", "~> 6.0"
+gem "rails", "~> 6.1"
 # gem "rails", github: "boazsegev/rails" # for iodine
 # gem "iodine", require: false
 # gem "falcon", require: false
 
 # Use Puma as the app server
-gem 'puma', '~> 4.0'
+gem 'puma', '~> 5.0'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '>= 4.0'
 
-gem "anycable-rails", "~> 0.6"
-# gem 'anycable', github: "anycable/anycable"
-# gem 'anycable-rails', github: "anycable/anycable-rails"
+gem 'grpc', '~> 1.37'
+gem "anycable-rails", "~> 1.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
